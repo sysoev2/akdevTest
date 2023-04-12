@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TodoController;
+use App\Http\Controllers\TodoListController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +23,8 @@ Route::name('auth.')->controller(AuthController::class)->group(function () {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::apiResource('todoList', \App\Http\Controllers\TodoListController::class);
+    Route::apiResource('todoList', TodoListController::class);
+    Route::apiResource('todo', TodoController::class);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

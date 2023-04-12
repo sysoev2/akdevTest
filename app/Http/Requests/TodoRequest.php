@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class TodoListRequest extends FormRequest
+class TodoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,16 @@ class TodoListRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'title' => 'required|max:255'
+        $rules = [
+            'title' => 'required|max:255',
+            'description' => 'nullable|string',
+            'complete' => 'boolean',
+            'todo_list_id' => 'required|exists:todo_lists,id'
         ];
+
+        if($this->method() === "PUT" || $this->method() === 'PATCH') {
+            $rules['todo_list_id'] = 'exists:todo_lists,id';
+        }
+        return $rules;
     }
 }
