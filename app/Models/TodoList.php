@@ -15,4 +15,9 @@ class TodoList extends Model
     {
         return $this->hasMany(Todo::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'users_todo_lists', 'todo_list_id','user_id')->withPivot('is_author');
+    }
 }

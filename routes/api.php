@@ -20,6 +20,10 @@ Route::name('auth.')->controller(AuthController::class)->group(function () {
     Route::post('/login', 'login')->name('login');
 });
 
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('todoList', \App\Http\Controllers\TodoListController::class);
+});
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });

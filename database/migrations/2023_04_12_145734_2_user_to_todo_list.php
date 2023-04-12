@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('todos', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->text('description')->nullable();
-            $table->boolean('complete')->default(false);
+        Schema::create('users_todo_lists', function (Blueprint $table) {
+            $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('todo_list_id')->unsigned();
-            $table->foreign('todo_list_id')->references('id')->on('todo_lists')->onDelete('cascade');
+            $table->boolean('is_author');
+            $table->primary(['user_id','todo_list_id']);
         });
     }
 
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('todos');
+        Schema::dropIfExists('users_todo_lists');
     }
 };
