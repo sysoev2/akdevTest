@@ -58,8 +58,11 @@ class TodoListController extends ApiController
 
     public function exportPDF(TodoList $todoList): JsonResponse
     {
-        Mail::to('sysoev2y@gmail.com')->send(new TodoListMail($todoList));
-        return $this->successResponse(message: 'Mail sent');
+        $mail = Mail::to(Auth::user()->email)->send(new TodoListMail($todoList));
+        if($mail) {
+            return $this->successResponse(message: 'Mail sent');
+        }
+        return $this->successResponse(message: 'Mail did not send');
     }
 
     /**

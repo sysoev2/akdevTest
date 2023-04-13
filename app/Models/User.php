@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -46,5 +47,10 @@ class User extends Authenticatable
     public function createApiToken(array $abilities = ['*'], DateTimeInterface $expiresAt = null): string
     {
         return $this->createToken(config('auth.api_token'), $abilities, $expiresAt)->plainTextToken;
+    }
+
+    public function todoLists(): BelongsToMany
+    {
+        return $this->belongsToMany(TodoList::class, 'users_todo_lists', 'user_id', 'todo_list_id')->withPivot('is_author');
     }
 }
