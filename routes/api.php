@@ -25,6 +25,7 @@ Route::name('auth.')->controller(AuthController::class)->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('todoList', TodoListController::class);
     Route::get('/todoList/{todoList}/todos', [TodoListController::class, 'showTodos']);
+    Route::get('/todoList/{todoList}/todos/exportPDF', [TodoListController::class, 'exportPDF']);
     Route::apiResource('todo', TodoController::class);
 });
 

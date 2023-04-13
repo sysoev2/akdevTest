@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Factories\TodoListDTOFactory;
 use App\Http\Requests\TodoListRequest;
+use App\Jobs\GenerateTodoPDF;
+use App\Mail\TodoListMail;
 use App\Models\TodoList;
 use App\Services\TodoListService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class TodoListController extends ApiController
 {
@@ -51,6 +54,12 @@ class TodoListController extends ApiController
     {
         $this->authorize('view', $todoList);
         return $this->successResponse($todoList->todos);
+    }
+
+    public function exportPDF(TodoList $todoList): JsonResponse
+    {
+        Mail::to('sysoev2y@gmail.com')->send(new TodoListMail($todoList));
+        return $this->successResponse(message: 'Mail sent');
     }
 
     /**
