@@ -1,10 +1,15 @@
 To run project run:
 
-`composer install`
+create .env file
 
+`composer install`
+`php artisan key:generate`
 `./vendor/bin/sail up`
 
-`./vendor/bin/sail migrate --seed`
+
+`./vendor/bin/sail bash`
+
+`php artisan migrate --seed`
 
 Routes:
 
