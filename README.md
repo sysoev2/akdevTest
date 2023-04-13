@@ -1,3 +1,33 @@
+To run project run:
+
+`composer install`
+
+`./vendor/bin/sail up`
+
+`./vendor/bin/sail migrate --seed`
+
+Routes:
+
+* POST            api/login  auth.login › AuthController@login
+* POST            api/register  auth.register › AuthController@register
+* GET|HEAD        api/todo  todo.index › TodoController@index
+* POST            api/todo  todo.store › TodoController@store
+* GET|HEAD        api/todo/{todo}  todo.show › TodoController@show
+* PUT|PATCH       api/todo/{todo}  todo.update › TodoController@update
+* DELETE          api/todo/{todo}  todo.destroy › TodoController@destroy
+* GET|HEAD        api/todoList  todoList.index › TodoListController@index
+* POST            api/todoList todoList.store › TodoListController@store
+* GET|HEAD        api/todoList/{todoList} todoList.show › TodoListController@show
+* PUT|PATCH       api/todoList/{todoList} todoList.update › TodoListController@update
+* DELETE          api/todoList/{todoList} todoList.destroy › TodoListController@destroy
+* GET|HEAD        api/todoList/{todoList}/todos todoList.showTodos › TodoListController@showTodos // shows all todos of todo list
+* GET|HEAD        api/todoList/{todoList}/todos/exportPDF todoList.exportPDF › TodoListController@exportPDF // sends todo list to mail as pdf
+* GET|HEAD        api/user 
+
+
+to see emails open http://localhost:8025/ Mailpit
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
