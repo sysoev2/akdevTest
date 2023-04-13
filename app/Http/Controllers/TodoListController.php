@@ -45,6 +45,15 @@ class TodoListController extends ApiController
     }
 
     /**
+     * Display todos of todoList.
+     */
+    public function showTodos(TodoList $todoList): JsonResponse
+    {
+        $this->authorize('view', $todoList);
+        return $this->successResponse($todoList->todos);
+    }
+
+    /**
      * Update the specified resource in storage.
      */
     public function update(TodoListRequest $request, TodoList $todoList): JsonResponse
